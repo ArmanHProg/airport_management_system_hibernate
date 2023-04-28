@@ -9,16 +9,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ModToPerTrip extends ModToPer<TripMod, TripPer> {
-
-    private static final ModToPerCompany MOD_TO_PER_COMPANY = new ModToPerCompany();
-
-
     @Override
     public TripPer getPersistentFrom(TripMod model) {
         Validator.checkNull(model);
+        ModToPerCompany temp = new ModToPerCompany();
 
         TripPer persistent = new TripPer();
-        persistent.setCompany(MOD_TO_PER_COMPANY.getPersistentFrom(model.getCompany()));
+        persistent.setCompany(temp.getPersistentFrom(model.getCompany()));
         persistent.setAirplane(model.getAirplane());
         persistent.setTownFrom(model.getTownFrom());
         persistent.setTownTo(model.getTownTo());
@@ -28,15 +25,16 @@ public class ModToPerTrip extends ModToPer<TripMod, TripPer> {
         return persistent;
     }
 
-
     @Override
     public Collection<TripPer> getPersistentListFrom(Collection<TripMod> modelList) {
         Validator.checkNull(modelList);
 
-        Set<TripPer> tripPerSet = new LinkedHashSet<>(modelList.size());
-        for (TripMod tempTripMod : modelList) {
-            tripPerSet.add(getPersistentFrom(tempTripMod));
+        Set<TripPer> tripsPerSet = new LinkedHashSet<>(modelList.size());
+        for(TripMod tempTripMod: modelList){
+            tripsPerSet.add(getPersistentFrom(tempTripMod));
         }
-        return tripPerSet;
+
+        return tripsPerSet;
+
     }
 }
