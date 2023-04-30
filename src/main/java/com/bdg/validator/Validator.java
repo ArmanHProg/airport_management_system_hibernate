@@ -3,6 +3,7 @@ package com.bdg.validator;
 public class Validator {
 
 
+    //testing
     public static void checkId(int id) {
         if (id <= 0) {
             throw new IllegalArgumentException("'id' must be a positive number: ");
