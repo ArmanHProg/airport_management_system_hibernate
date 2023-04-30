@@ -10,7 +10,7 @@ public class Validator {
         }
     }
 
-
+        //added comment
     public static void checkNull(Object item) {
         if (item == null) {
             throw new NullPointerException("Passed null value as 'item': ");
